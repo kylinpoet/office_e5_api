@@ -1,9 +1,7 @@
 #每周1，4，6自动更新refresh_token
 name: run api and update token
-
-on: 
-  release:
-    types: [published]
+on:
+  workflow_dispatch:
   push:
     tags:
     - 'v*'
