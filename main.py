@@ -88,9 +88,6 @@ def getmstoken(ms_token):
 
 mstoken = getmstoken(ms_token)
 
-encrypted_value=createsecret(getpublickey(Auth,geturl),mstoken)
-setsecret(encrypted_value,key_id,puturl)
-
 def sendEmail(content):
     headers={
             'Authorization': 'bearer ' + mstoken,
@@ -156,3 +153,5 @@ def searchOneDrive():
 searchEmail()
 time.sleep(3)
 searchOneDrive()
+encrypted_value=createsecret(getpublickey(Auth,geturl),mstoken)
+setsecret(encrypted_value,key_id,puturl)
