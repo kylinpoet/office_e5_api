@@ -82,8 +82,8 @@ def getmstoken(ms_token):
         else:
             if retry_ == 3:
                 print(r'微软密钥获取失败')
-    jsontxt = json.loads(html.text)       
-    return jsontxt['access_token']
+                print(html.json())  
+    return html.json()['access_token']
 
 
 mstoken = getmstoken(ms_token)
