@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import requests as req
 import json
 import time 
@@ -21,7 +23,7 @@ puturl=r'https://api.github.com/repos/'+gh_repo+r'/actions/secrets/MS_TOKEN'
 geturl=r'https://api.github.com/repos/'+gh_repo+r'/actions/secrets/public-key'
 key_id='kylinpoet'
 
-#公钥获取
+
 def getpublickey(Auth,geturl):
     headers={'Accept': 'application/vnd.github.v3+json','Authorization': Auth}
     html = req.get(geturl,headers=headers)
@@ -32,7 +34,7 @@ def getpublickey(Auth,geturl):
     return public_key
 
 
-#token加密
+
 def createsecret(public_key,secret_value):
     public_key = public.PublicKey(public_key.encode("utf-8"), encoding.Base64Encoder())
     sealed_box = public.SealedBox(public_key)
@@ -40,7 +42,7 @@ def createsecret(public_key,secret_value):
     return b64encode(encrypted).decode("utf-8")
 
 
-#token上传
+
 def setsecret(encrypted_value,key_id,puturl):
     headers={
             'Accept': 'application/vnd.github.v3+json',
