@@ -1,12 +1,14 @@
 #每周1，4，6自动更新refresh_token
 name: run api and update token
-on:
+on: 
   workflow_dispatch:
+  release:
+    types: [published]
   push:
     tags:
     - 'v*'
   #  branches: 
-  #    - master
+  #    - master master
   schedule:
     - cron: '12 */6 * * 1-5'
 
