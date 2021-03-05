@@ -62,13 +62,13 @@ def setsecret(encrypted_value,key_id,puturl):
                 print(r'微软密钥上传失败')        
     return putstatus
 
-def getmstoken(ms_token):
+def getmstoken(token):
     headers={
             'Content-Type':'application/x-www-form-urlencoded'
             }
     data={
          'grant_type': 'refresh_token',
-         'refresh_token': ms_token,
+         'refresh_token': token,
          'client_id':client_id,
          'client_secret':client_secret,
          # 'redirect_uri':r'https://login.microsoftonline.com/common/oauth2/nativeclient',
@@ -82,8 +82,10 @@ def getmstoken(ms_token):
         else:
             if retry_ == 3:
                 print(r'微软密钥获取失败')
-                print(html.json())  
-    return html.json()['access_token']
+                print(html.json())
+    jsontxt = html.json()         
+    ms_token = jsontxt['refresh_token']
+    return jsontxt['access_token']
 
 
 mstoken = getmstoken(ms_token)
@@ -153,5 +155,5 @@ def searchOneDrive():
 searchEmail()
 time.sleep(3)
 searchOneDrive()
-encrypted_value=createsecret(getpublickey(Auth,geturl),mstoken)
+encrypted_value=createsecret(getpublickey(Auth,geturl),ms_token)
 setsecret(encrypted_value,key_id,puturl)
